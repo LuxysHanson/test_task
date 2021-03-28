@@ -43,6 +43,10 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'apple/list' => 'apple/index',
+                'apple/drop/<id:\d+>' => 'apple/drop',
+                'apple/eat/<id:\d+>/<eat:\d+>' => 'apple/eat',
+                'apple/rot/<id:\d+>' => 'apple/rot',
             ],
         ],
     ],
