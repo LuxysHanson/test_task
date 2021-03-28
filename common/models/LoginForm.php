@@ -1,4 +1,5 @@
 <?php
+
 namespace common\models;
 
 use Yii;
@@ -9,16 +10,12 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
-    public $username;
+    public $username = "admin_test";
     public $password;
     public $rememberMe = true;
 
     private $_user;
 
-
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -28,6 +25,15 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'username' => Yii::t('app', "Логин"),
+            'password' => Yii::t('app', "Пароль"),
+            'rememberMe' => Yii::t('app', "Запомнить меня")
         ];
     }
 
