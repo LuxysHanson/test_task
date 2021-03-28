@@ -20,43 +20,22 @@ use yii\db\ActiveRecord;
 class Apple extends ActiveRecord
 {
 
-    public function __construct($color, $config = [])
-    {
-        parent::__construct($config);
-        $this->color = $color;
-    }
+    public $colors = array('black','green','white','blue','orange', 'red');
 
     public static function tableName()
     {
         return 'apple_info';
     }
 
-    public function eat($percent)
+    public function attributeLabels()
     {
-        if ($this->status == AppleStatusEnum::STATUS_HANGING) {
-            throw new Exception(Yii::t('app', "Съесть нельзя, яблоко на дереве"));
-        }
-
-        if ($this->status == AppleStatusEnum::STATUS_ROT) {
-            throw new Exception(Yii::t('app', "Съесть нельзя, яблоко испорчено"));
-        }
-
-        $part = ($percent * $this->size) / 100;
-        $this->size = round($this->size - $part, 2);
-//        $this->save();
+        return [
+            'color' => Yii::t('app', "Цвет"),
+            'status' => Yii::t('app', "Статус"),
+            'created_at' => Yii::t('app', "Дата появления"),
+            'updated_at' => Yii::t('app', "Дата падения"),
+            'size' => Yii::t('app', "Размер")
+        ];
     }
 
-    public function fallToGround()
-    {
-        $this->status = AppleStatusEnum::STATUS_FALL;
-        $this->updated_at = time();
-//        $this->save();
-    }
-
-    public function beforeSave($insert)
-    {
-        if ($this->isNewRecord) $this->created_at = time();
-
-        return parent::beforeSave($insert);
-    }
 }
